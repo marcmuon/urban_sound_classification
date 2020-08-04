@@ -22,7 +22,7 @@ class AudioFeature:
             [self.features, feature] if self.features is not None else feature
         )
 
-    def _extract_mfcc(self, n_mfcc=12):
+    def _extract_mfcc(self, n_mfcc=25):
         mfcc = librosa.feature.mfcc(self.y, sr=self.sr, n_mfcc=n_mfcc)
 
         mfcc_mean = mfcc.mean(axis=1).T
