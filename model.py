@@ -1,7 +1,9 @@
 from sklearn.model_selection import LeaveOneGroupOut, StratifiedKFold, GridSearchCV
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+import numpy as np
+import random
 
 
 class Model:
@@ -13,7 +15,6 @@ class Model:
         self.folds = folds
         self.cfg = cfg
 
-        self.trained_models_ = []
         self.val_fold_scores_ = []
 
     def train_kfold(self):
@@ -30,9 +31,8 @@ class Model:
             clf = self.cfg["model"]
             clf.fit(X_train, y_train)
 
-            self.trained_models_.append(clf)
             y_pred = clf.predict(X_test)
-            
+
             fold_acc = accuracy_score(y_test, y_pred)
             self.val_fold_scores_.append(fold_acc)
 

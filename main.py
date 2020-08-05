@@ -16,14 +16,6 @@ def parse_metadata(path):
     return meta
 
 
-def slice_holdout_idx(fold_arr):
-    random_idx = []
-    for i in range(1, 11):
-        random_idx.extend(
-            np.random.choice(np.where(fold_arr == i)[0], 45, replace=False).tolist()  
-        )
-    return np.array(random_idx)
-
 if __name__ == "__main__":
 
     metadata = parse_metadata("metadata/UrbanSound8K.csv")
@@ -52,11 +44,6 @@ if __name__ == "__main__":
     labels = np.array([audio.label for audio in audio_features])
     folds = np.array([audio.fold for audio in audio_features])
 
-    holdout_idx = slice_holdout_idx(folds)
-    
-    features_test = feature_matrix[holdout_idx, :]
-    labels_test = labels[holdout_idx]
-
     features_train = np.delete(feature_matrix, holdout_idx, axis=0)
     labels_train = np.delete(labels, holdout_idx, axis=0)
     folds_train = np.delete(folds, holdout_idx, axis=0)
@@ -72,5 +59,6 @@ if __name__ == "__main__":
     )
     model = Model(features_train, labels_train, folds_train, model_cfg)
     fold_acc = model.train_kfold()
-
+    
     # TODO - show box plot or std and mean like they were saying
+
