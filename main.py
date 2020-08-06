@@ -44,10 +44,6 @@ if __name__ == "__main__":
     labels = np.array([audio.label for audio in audio_features])
     folds = np.array([audio.fold for audio in audio_features])
 
-    features_train = np.delete(feature_matrix, holdout_idx, axis=0)
-    labels_train = np.delete(labels, holdout_idx, axis=0)
-    folds_train = np.delete(folds, holdout_idx, axis=0)
-
     model_cfg = dict(
         model=RandomForestClassifier(
             random_state=42,
@@ -57,8 +53,5 @@ if __name__ == "__main__":
             bootstrap=True,
         ),
     )
-    model = Model(features_train, labels_train, folds_train, model_cfg)
+    model = Model(features, labels, folds, model_cfg)
     fold_acc = model.train_kfold()
-    
-    # TODO - show box plot or std and mean like they were saying
-
