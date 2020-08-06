@@ -53,5 +53,5 @@ if __name__ == "__main__":
             bootstrap=True,
         ),
     )
-    model = Model(features, labels, folds, model_cfg)
+    model = Model(feature_matrix, labels, folds, model_cfg)
     fold_acc = model.train_kfold()
