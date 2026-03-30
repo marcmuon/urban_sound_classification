@@ -11,4 +11,4 @@ J. Salamon, C. Jacoby and J. P. Bello, "A Dataset and Taxonomy for Urban Sound R
 ## Blog
 
 Here's a blog post I wrote on implementing this research paper:
-https://towardsdatascience.com/urban-sound-classification-with-librosa-nuanced-cross-validation-5b5eb3d9ee30
+https://medium.com/data-science/urban-sound-classification-with-librosa-nuanced-cross-validation-5b5eb3d9ee30
